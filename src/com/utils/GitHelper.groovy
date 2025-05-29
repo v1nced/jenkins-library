@@ -44,7 +44,7 @@ class GitHelper implements Serializable {
     }
 
     void cloneBranch(String repoUrl, String branch, String gitCredentialsId, boolean recurseSubmodules = false) {
-        if (gitCredentialsId) {
+        if (gitCredentialsId != '') {
             script.withCredentials([gitUsernamePassword(credentialsId: "${gitCredentialsId}", gitToolName: 'git')]) {
                 script.sh "git clone --branch ${branch} ${repoUrl}"
             }
