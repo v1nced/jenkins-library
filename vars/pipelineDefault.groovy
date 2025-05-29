@@ -17,7 +17,7 @@ def call (Map args = [
         stages{
             stage('Prep'){
                 when{
-                    expression{}
+                    expression{env.DEBUG_MODE == "true"}
                 }
                 steps{
                     script{
@@ -27,7 +27,7 @@ def call (Map args = [
             }
             stage('Dotnet Test'){
                 when{
-                    expression{}
+                    expression{env.DEBUG_MODE == "true"}
                 }
                 steps{
                     script{
@@ -37,7 +37,7 @@ def call (Map args = [
             }
             stage('NPM Test'){
                 when{
-                    expression{}
+                    expression{env.DEBUG_MODE == "true"}
                 }
                 steps{
                     script{
