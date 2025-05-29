@@ -23,7 +23,7 @@ def call (Map args = [
                 }
                 steps{
                     script{
-                        cloneGitRepo("$GIT_REPO", "main", "GIT_CREDS", false)
+                        cloneGitRepo("$GIT_REPO", "main", "$GIT_CREDS", false)
                     }
                 }
             }
