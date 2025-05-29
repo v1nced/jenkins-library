@@ -1,5 +1,6 @@
 def call (Map args = [
         git_repo: '',
+        git_creds: '',
         dotnet_test: '',
         npm_build: '',
         send_notification: '',
@@ -9,6 +10,7 @@ def call (Map args = [
         agent any
         environment{
             GIT_REPO = "${args.git_repo ?: env.GIT_REPO ?: 'false'}"
+            GIT_CREDS = "${args.git_creds ?: env.GIT_CREDS ?: ''}"
             DOTNET_TEST = "${args.dotnet_test ?: env.DOTNET_TEST ?: 'false'}"
             NPM_BUILD = "${args.npm_build ?: env.NPM_BUILD ?: 'false'}"
             SEND_NOTIFICATION = "${args.send_notification ?: env.SEND_NOTIFICATION ?: 'false'}"
@@ -21,7 +23,7 @@ def call (Map args = [
                 }
                 steps{
                     script{
-                        cloneGitRepo("$GIT_REPO", "main", "github", false)
+                        cloneGitRepo("$GIT_REPO", "main", "GIT_CREDS", false)
                     }
                 }
             }
