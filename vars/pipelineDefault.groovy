@@ -33,9 +33,10 @@ def call (Map args = [
                 }
                 steps{
                     script{
-                        echo "running DOTNET test"
-                        echo "Test FAILED" | grep "FAILED" && unstable: "error"
-
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE'){
+                            echo "running DOTNET test"
+                            sh "exit 1"
+                        }
                     }
                 }
             }
