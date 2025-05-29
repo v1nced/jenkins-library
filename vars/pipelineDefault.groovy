@@ -1,0 +1,50 @@
+def call (Map args = [
+        git_repo: '',
+        dotnet_test: '',
+        npm_build: '',
+        send_notification: '',
+        debug_mode: ''
+]) {
+    pipeline{
+        agent any
+        environment{
+            GIT_REPO = "${args.git_repo ?: env.GIT_REPO ?: 'false'}"
+            DOTNET_TEST = "${args.dotnet_test ?: env.DOTNET_TEST ?: 'false'}"
+            NPM_BUILD = "${args.npm_build ?: env.NPM_BUILD ?: 'false'}"
+            SEND_NOTIFICATION = "${args.send_notification ?: env.SEND_NOTIFICATION ?: 'false'}"
+            DEBUG_MODE = "${args.debug_mode ?: env.DEBUG_MODE ?: 'false'}"
+        }
+        stages{
+            stage('Prep'){
+                when{
+                    expression{}
+                }
+                steps{
+                    script{
+                        cloneGitRepo("$GIT_REPO", "main", "github", false)
+                    }
+                }
+            }
+            stage('Dotnet Test'){
+                when{
+                    expression{}
+                }
+                steps{
+                    script{
+                        echo "running DOTNET test"
+                    }
+                }
+            }
+            stage('NPM Test'){
+                when{
+                    expression{}
+                }
+                steps{
+                    script{
+                        echo "running NPM test"
+                    }
+                }
+            }
+        }
+    }
+}
