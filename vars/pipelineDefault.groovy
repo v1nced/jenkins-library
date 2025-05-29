@@ -34,6 +34,8 @@ def call (Map args = [
                 steps{
                     script{
                         echo "running DOTNET test"
+                        echo "Test FAILED" | grep "FAILED" && unstable: "error"
+
                     }
                 }
             }
